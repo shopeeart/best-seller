@@ -4,7 +4,86 @@
 <meta charset="UTF-8">
 <title>Đồ Hay Cho Bro | Chia sẻ sản phẩm thú vị</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
 
+<div class="card">
+    <a id="productLink" href="#" target="_blank">
+        <h1 id="productTitle"></h1>
+        <div class="slider" id="slider"></div>
+    </a>
+
+    <div class="dots" id="dots"></div>
+</div>
+
+<script>
+const products = [
+    {
+        Title: "🔥 Bodymist Nước Hoa Nam Nữ EHERB",
+        link: "https://vt.tiktok.com/ZS9dGSWL1S1UW-0HEhh/",
+        images: [
+            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/c4c1d565f0f645d5b80f57a4cc290062~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
+            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/cd4a97ea738b49d4aebf833232d2c2c3~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
+            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/cd4a97ea738b49d4aebf833232d2c2c3~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393"
+        ]
+    },
+    {
+        Title: "🔥Combo Boy Phố 5 Chai Nước Hoa Nam Sang Trọng",
+        link: "https://vt.tiktok.com/ZS9dGDRfckKru-bCqwE/",
+        images: [
+            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/1534c235408f4b62801ecfa2a81702fd~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
+            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/22c2938b42634bcd9a0ae9a3363c8f99~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
+            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/9eed49e1ac604a6b840a15a1c9007f3c~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393"
+        ]
+    }
+];
+
+const randomIndex = Math.floor(Math.random() * products.length);
+const product = products[randomIndex];
+
+const productLink = document.getElementById("productLink");
+const productTitle = document.getElementById("productTitle");
+const slider = document.getElementById("slider");
+const dots = document.getElementById("dots");
+
+productLink.href = product.link;
+productTitle.innerText = product.Title;
+document.title = product.Title + " | Chia sẻ sản phẩm thú vị";
+
+product.images.forEach((src, index) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.className = "slide" + (index === 0 ? " active" : "");
+    img.alt = product.Title + " - ảnh " + (index + 1);
+    slider.appendChild(img);
+
+    const dot = document.createElement("span");
+    dot.className = "dot" + (index === 0 ? " active" : "");
+    dots.appendChild(dot);
+});
+
+const slides = document.querySelectorAll(".slide");
+const dotItems = document.querySelectorAll(".dot");
+
+let current = 0;
+
+function showSlide(index){
+    slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+    });
+
+    dotItems.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+    });
+}
+
+if (slides.length > 1) {
+    setInterval(() => {
+        current = (current + 1) % slides.length;
+        showSlide(current);
+    }, 1000);
+}
+</script>
 <style>
     *{
         box-sizing:border-box;
@@ -96,87 +175,5 @@
   pointer-events: none;
 }
 </style>
-</head>
-<body>
-
-<div class="card">
-    <a id="productLink" href="#" target="_blank">
-         <div class="close-btn">X</div>
-        <h1 id="productTitle"></h1>
-        <div class="slider" id="slider"></div>
-    </a>
-
-    <div class="dots" id="dots"></div>
-</div>
-
-<script>
-const products = [
-    {
-        Title: "🔥 Bodymist Nước Hoa Nam Nữ EHERB",
-        link: "https://vt.tiktok.com/ZS9dGSWL1S1UW-0HEhh/",
-        images: [
-            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/c4c1d565f0f645d5b80f57a4cc290062~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
-            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/cd4a97ea738b49d4aebf833232d2c2c3~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
-            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/cd4a97ea738b49d4aebf833232d2c2c3~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393"
-        ]
-    },
-    {
-        Title: "🔥Combo Boy Phố 5 Chai Nước Hoa Nam Sang Trọng",
-        link: "https://vt.tiktok.com/ZS9dGDRfckKru-bCqwE/",
-        images: [
-            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/1534c235408f4b62801ecfa2a81702fd~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
-            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/22c2938b42634bcd9a0ae9a3363c8f99~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
-            "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/9eed49e1ac604a6b840a15a1c9007f3c~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393"
-        ]
-    }
-];
-
-const randomIndex = Math.floor(Math.random() * products.length);
-const product = products[randomIndex];
-
-const productLink = document.getElementById("productLink");
-const productTitle = document.getElementById("productTitle");
-const slider = document.getElementById("slider");
-const dots = document.getElementById("dots");
-
-productLink.href = product.link;
-productTitle.innerText = product.Title;
-document.title = product.Title + " | Chia sẻ sản phẩm thú vị";
-
-product.images.forEach((src, index) => {
-    const img = document.createElement("img");
-    img.src = src;
-    img.className = "slide" + (index === 0 ? " active" : "");
-    img.alt = product.Title + " - ảnh " + (index + 1);
-    slider.appendChild(img);
-
-    const dot = document.createElement("span");
-    dot.className = "dot" + (index === 0 ? " active" : "");
-    dots.appendChild(dot);
-});
-
-const slides = document.querySelectorAll(".slide");
-const dotItems = document.querySelectorAll(".dot");
-
-let current = 0;
-
-function showSlide(index){
-    slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
-    });
-
-    dotItems.forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
-    });
-}
-
-if (slides.length > 1) {
-    setInterval(() => {
-        current = (current + 1) % slides.length;
-        showSlide(current);
-    }, 1000);
-}
-</script>
-
 </body>
 </html>
