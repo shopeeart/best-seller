@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mobile Product Page</title>
+  <title>Cosplay Spider Suit</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,87 +12,139 @@
     }
 
     :root {
-      --shopee-orange: #ee4d2d;
-      --text-main: #222;
-      --text-sub: #666;
-      --text-light: #999;
-      --border: #f0f0f0;
-      --bg: #f5f5f5;
-      --white: #fff;
+      --bg: #0f1117;
+      --card: #171a22;
+      --card-2: #1d2230;
+      --text: #ffffff;
+      --muted: #b9bfd1;
+      --line: rgba(255,255,255,0.08);
+      --red: #ff3b5c;
+      --red-2: #ff6b81;
+      --blue: #4cc9ff;
+      --chip: rgba(255,255,255,0.08);
+      --shadow: 0 16px 40px rgba(0,0,0,0.35);
     }
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text-main);
+      background:
+        radial-gradient(circle at top, rgba(255,59,92,0.22), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(76,201,255,0.16), transparent 24%),
+        var(--bg);
+      color: var(--text);
       display: flex;
       justify-content: center;
-      padding: 12px;
+      padding: 0;
     }
 
-    .phone {
+    .app {
       width: 100%;
-      max-width: 390px;
+      max-width: 430px;
       min-height: 100vh;
-      background: var(--bg);
-      overflow: hidden;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    }
-
-    .product-page {
-      background: var(--bg);
-    }
-
-    .gallery {
+      background: linear-gradient(180deg, #0f1117 0%, #131722 100%);
       position: relative;
-      background: #fff;
+      overflow-x: hidden;
+      padding-bottom: 100px;
     }
 
-    .gallery-main {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      background: #fff;
+    .hero {
+      padding: 14px 14px 0;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: 24px;
       overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image-wrap {
       position: relative;
+      aspect-ratio: 1 / 1.15;
+      background: #111;
       cursor: pointer;
     }
 
-    .gallery-main img {
+    .hero-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .image-counter {
+    .overlay-top {
       position: absolute;
-      right: 10px;
-      bottom: 10px;
-      padding: 5px 10px;
-      font-size: 13px;
+      inset: 0 0 auto 0;
+      padding: 18px 16px 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.48), transparent);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       color: #fff;
-      background: rgba(0,0,0,0.38);
-      border-radius: 16px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 7px 12px;
+      backdrop-filter: blur(8px);
     }
 
-    .section {
-      background: var(--white);
-      margin-top: 8px;
-      padding: 12px;
+    .overlay-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 18px 16px 16px;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.72));
     }
 
-    .style-text {
-      font-size: 15px;
-      color: #333;
+    .eyebrow {
+      font-size: 12px;
+      color: #ffd3da;
+      margin-bottom: 8px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      line-height: 1.18;
+      font-weight: 800;
       margin-bottom: 10px;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #e8eaf3;
+      max-width: 92%;
+    }
+
+    .counter {
+      position: absolute;
+      right: 12px;
+      bottom: 14px;
+      font-size: 12px;
+      color: #fff;
+      background: rgba(255,255,255,0.18);
+      padding: 6px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
     }
 
     .thumbs {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       overflow-x: auto;
-      padding-bottom: 2px;
+      padding: 12px 0 0;
+      scrollbar-width: none;
     }
 
     .thumbs::-webkit-scrollbar {
@@ -100,20 +152,20 @@
     }
 
     .thumb {
-      width: 58px;
-      height: 58px;
-      border-radius: 8px;
-      border: 1.5px solid #ddd;
+      flex: 0 0 72px;
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
       overflow: hidden;
-      flex: 0 0 auto;
-      background: #fff;
+      border: 2px solid transparent;
+      background: #0e1016;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: .2s ease;
     }
 
     .thumb.active {
-      border-color: var(--shopee-orange);
-      box-shadow: 0 0 0 1px rgba(238,77,45,0.15);
+      border-color: var(--red-2);
+      box-shadow: 0 0 0 3px rgba(255,107,129,0.15);
     }
 
     .thumb img {
@@ -123,280 +175,395 @@
       display: block;
     }
 
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 12px;
-      margin-bottom: 8px;
+    .section {
+      padding: 16px 14px 0;
     }
 
-    .price-wrap {
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .price-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .price-main {
       display: flex;
       align-items: baseline;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
-    .current-price {
-      color: var(--shopee-orange);
-      font-weight: 700;
-      font-size: 31px;
+    .sale-price {
+      font-size: 34px;
+      font-weight: 800;
+      color: #fff;
       line-height: 1;
+    }
+
+    .sale-price small {
+      font-size: 18px;
+      opacity: .9;
+      margin-right: 2px;
     }
 
     .old-price {
-      color: #999;
-      font-size: 13px;
+      font-size: 14px;
+      color: var(--muted);
       text-decoration: line-through;
     }
 
-    .sold-like {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      color: #666;
+    .discount {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
+      padding: 7px 10px;
+      border-radius: 999px;
       white-space: nowrap;
     }
 
-    .heart-btn {
-      border: none;
-      background: transparent;
-      font-size: 22px;
-      cursor: pointer;
-      color: #999;
-      line-height: 1;
-    }
-
-    .tag-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-
-    .tag {
-      border: 1px solid #ffb3a5;
-      color: var(--shopee-orange);
-      background: #fff5f2;
-      font-size: 12px;
-      padding: 4px 7px;
-      border-radius: 3px;
-      line-height: 1.2;
-    }
-
-    .title {
-      font-size: 17px;
+    .product-name {
+      font-size: 18px;
       line-height: 1.45;
-      color: #222;
-      font-weight: 500;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
 
-    .info-list {
-      background: var(--white);
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: var(--chip);
+      border: 1px solid var(--line);
+      color: #eef1fb;
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 999px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255,59,92,0.18), rgba(76,201,255,0.14));
+      font-size: 18px;
+    }
+
+    .feature h4 {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .feature p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .sizes {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
       margin-top: 8px;
     }
 
-    .info-item {
-      display: flex;
-      gap: 10px;
-      padding: 14px 12px;
-      border-bottom: 1px solid var(--border);
-      align-items: flex-start;
+    .size-btn {
+      min-width: 76px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
     }
 
-    .info-item:last-child {
-      border-bottom: none;
+    .size-btn.active {
+      background: linear-gradient(135deg, rgba(255,59,92,0.24), rgba(255,107,129,0.18));
+      border-color: rgba(255,107,129,0.5);
+      box-shadow: 0 0 0 3px rgba(255,107,129,0.12);
     }
 
-    .info-icon {
-      color: var(--shopee-orange);
-      font-size: 16px;
-      line-height: 1.4;
-      margin-top: 1px;
-    }
-
-    .info-content {
-      flex: 1;
-    }
-
-    .info-title {
-      font-size: 15px;
-      color: #333;
-      line-height: 1.4;
-    }
-
-    .highlight {
-      color: var(--shopee-orange);
-    }
-
-    .info-sub {
-      margin-top: 4px;
-      color: #888;
+    .size-note {
+      margin-top: 10px;
       font-size: 13px;
-      line-height: 1.45;
+      line-height: 1.5;
+      color: var(--muted);
     }
 
-    .arrow {
-      color: #bbb;
-      font-size: 18px;
-      line-height: 1;
-      margin-top: 2px;
+    .desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #e7eaf5;
     }
 
-    .bottom-bar {
-      position: sticky;
+    .desc p + p {
+      margin-top: 12px;
+    }
+
+    .notice {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .sticky-bar {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: 0;
+      width: 100%;
+      max-width: 430px;
+      padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(10,12,18,0.88);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255,255,255,0.08);
       display: flex;
       gap: 10px;
-      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-      background: rgba(255,255,255,0.98);
-      border-top: 1px solid #eee;
-      backdrop-filter: blur(8px);
+      z-index: 20;
     }
 
     .btn {
-      height: 46px;
-      border-radius: 10px;
+      height: 52px;
       border: none;
+      border-radius: 18px;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 800;
       cursor: pointer;
     }
 
     .btn-outline {
       flex: 1;
-      background: #fff7f5;
-      color: var(--shopee-orange);
-      border: 1px solid #ffd0c5;
+      background: rgba(255,255,255,0.05);
+      color: white;
+      border: 1px solid var(--line);
     }
 
     .btn-primary {
-      flex: 1.2;
-      background: linear-gradient(135deg, #ff6a3d, #ee4d2d);
+      flex: 1.35;
+      background: linear-gradient(135deg, var(--red), var(--red-2));
       color: white;
-      box-shadow: 0 8px 18px rgba(238, 77, 45, 0.22);
+      box-shadow: 0 14px 30px rgba(255,59,92,0.28);
     }
   </style>
 </head>
 <body>
-  <div class="phone">
-    <div id="app"></div>
-  </div>
+  <div class="app" id="app"></div>
 
   <script>
-    const products = [
-      {
-        Title: "🔥 Bodymist Nước Hoa Nam Nữ EHERB",
-        link: "https://vt.tiktok.com/ZS9dGSWL1S1UW-0HEhh/",
-        images: [
-          "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/c4c1d565f0f645d5b80f57a4cc290062~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
-          "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/cd4a97ea738b49d4aebf833232d2c2c3~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393",
-          "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/cd4a97ea738b49d4aebf833232d2c2c3~tplv-aphluv4xwc-resize-webp:800:800.webp?dr=15584&t=555f072d&ps=933b5bde&shp=6ce186a1&shcp=e1be8f53&idc=my&from=1826719393"
-        ]
-      }
-    ];
+    const product = {
+      title: "[CHE TÊN] Cosplay người nhện siêu co giãn ôm body",
+      subtitle: "Jumpsuit liền thân ôm dáng, chất vải co giãn tốt, có khóa mở tiện dụng.",
+      price: 175000,
+      oldPrice: 211750,
+      discount: "-17%",
+      link: "https://shorten.asia/FhjFhGhm",
+      brand: "SPIDER COSPLAY",
+      images: [
+            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9m48wb1f.webp",
+            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9jxl3h34.webp",
+            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9jtde0f5.webp"
+      ],
+      features: [
+        {
+          icon: "🕸️",
+          title: "Ôm body, tôn dáng",
+          text: "Phom jumpsuit liền thân cho cảm giác gọn người, nổi bật cá tính cosplay khi lên hình."
+        },
+        {
+          icon: "↔️",
+          title: "Chất vải siêu co giãn",
+          text: "Phù hợp kiểu mặc ôm sát cơ thể, dễ vận động hơn so với chất liệu bí cứng."
+        },
+        {
+          icon: "🔓",
+          title: "Thiết kế có khóa mở",
+          text: "Tối ưu trải nghiệm sử dụng, thuận tiện hơn khi mặc và tháo đồ."
+        },
+        {
+          icon: "✨",
+          title: "Phong cách nổi bật",
+          text: "Phù hợp chụp ảnh, cosplay, sự kiện, party, hóa trang hoặc nội dung sáng tạo."
+        }
+      ],
+      sizes: [
+        { label: "S", note: "40–50kg" },
+        { label: "M", note: "50–60kg" }
+      ],
+      description: [
+        "Đây là mẫu cosplay người nhện theo phong cách bodysuit ôm sát, tập trung vào cảm giác co giãn, gọn người và tạo hiệu ứng hình thể rõ ràng khi mặc.",
+        "Thiết kế jumpsuit liền thân giúp tổng thể trông đồng nhất hơn, phù hợp chụp ảnh, quay video hoặc dùng trong các dịp cần một outfit nổi bật và dễ gây chú ý.",
+        "Mẫu này cũng được mô tả có khóa mở tiện dụng, nên trải nghiệm sử dụng thực tế sẽ linh hoạt hơn so với kiểu bodysuit kín hoàn toàn."
+      ],
+      notice: "Bạn nên kiểm tra lại size, độ co giãn thực tế và ảnh thật từ shop trước khi chốt đơn. Màu sắc hiển thị có thể chênh lệch nhẹ giữa ảnh và thực tế do ánh sáng hoặc màn hình."
+    };
 
-    const product = products[0];
-    let currentImageIndex = 0;
+    let currentImage = 0;
+    let currentSize = 0;
 
-    function formatPrice(price) {
-      return new Intl.NumberFormat("vi-VN").format(price) + "đ";
-    }
-
-    function render() {
-      const app = document.getElementById("app");
-
-      app.innerHTML = `
-        <div class="product-page">
-          <div class="gallery">
-            <div class="gallery-main" onclick="openProduct()">
-              <img id="mainImage" src="${product.images[currentImageIndex]}" alt="${product.Title}">
-              <div class="image-counter">
-                ${currentImageIndex + 1}/${product.images.length}
-              </div>
-            </div>
-          </div>
-
-          <div class="section">
-            <div class="style-text">Phân loại: Mẫu đang chọn</div>
-
-            <div class="thumbs">
-              ${product.images.map((img, index) => `
-                <div class="thumb ${index === currentImageIndex ? "active" : ""}" onclick="changeImage(${index})">
-                  <img src="${img}" alt="thumb-${index + 1}">
-                </div>
-              `).join("")}
-            </div>
-          </div>
-
-          <div class="section">
-            <div class="price-row">
-              <div class="price-wrap">
-                <div class="current-price">${formatPrice(658445)}</div>
-                <div class="old-price">${formatPrice(799000)}</div>
-              </div>
-
-              <div class="sold-like">
-                <span>Đã bán 9</span>
-                <button class="heart-btn">♡</button>
-              </div>
-            </div>
-
-            <div class="tag-row">
-              <span class="tag">Mua tối thiểu 129.999đ để được giảm 3%</span>
-              <span class="tag">Mua 2 giảm 3%</span>
-            </div>
-
-            <div class="title">${product.Title}</div>
-          </div>
-
-          <div class="info-list">
-            <div class="info-item">
-              <div class="info-icon">🕒</div>
-              <div class="info-content">
-                <div class="info-title">
-                  <span class="highlight">Hàng đặt trước</span> (có hàng sau 10 ngày) Nhận hàng trong 7 Th04 - 12 Th04
-                </div>
-                <div class="info-sub">
-                  Phí ship 0đ<br>
-                  Tặng Voucher 15.000đ nếu đơn giao sau thời gian trên.
-                </div>
-              </div>
-              <div class="arrow">›</div>
-            </div>
-
-            <div class="info-item">
-              <div class="info-icon">🛡️</div>
-              <div class="info-content">
-                <div class="info-title">Trả hàng miễn phí 15 ngày</div>
-              </div>
-              <div class="arrow">›</div>
-            </div>
-          </div>
-
-          <div class="bottom-bar">
-            <button class="btn btn-outline" onclick="copyProductLink()">Sao chép link</button>
-            <button class="btn btn-primary" onclick="openProduct()">Mua ngay</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function changeImage(index) {
-      currentImageIndex = index;
-      render();
+    function money(value) {
+      return new Intl.NumberFormat('vi-VN').format(value) + "đ";
     }
 
     function openProduct() {
       window.open(product.link, "_blank");
     }
 
-    function copyProductLink() {
-      navigator.clipboard.writeText(product.link)
-        .then(() => alert("Đã sao chép link sản phẩm"))
-        .catch(() => alert("Không thể sao chép link"));
+    function changeImage(index) {
+      currentImage = index;
+      render();
+    }
+
+    function selectSize(index) {
+      currentSize = index;
+      render();
+    }
+
+    function render() {
+      const app = document.getElementById("app");
+
+      app.innerHTML = `
+        <section class="hero">
+          <div class="hero-card">
+            <div class="hero-image-wrap" onclick="openProduct()">
+              <img class="hero-image" src="${product.images[currentImage]}" alt="${product.title}">
+              <div class="overlay-top">
+                <div class="brand">${product.brand}</div>
+              </div>
+              <div class="overlay-bottom">
+                <div class="eyebrow">Bộ đồ cosplay / mobile landing</div>
+                <div class="hero-title">${product.title}</div>
+                <div class="hero-sub">${product.subtitle}</div>
+              </div>
+              <div class="counter">${currentImage + 1}/${product.images.length}</div>
+            </div>
+          </div>
+
+          <div class="thumbs">
+            ${product.images.map((img, index) => `
+              <div class="thumb ${index === currentImage ? 'active' : ''}" onclick="changeImage(${index})">
+                <img src="${img}" alt="thumb-${index + 1}">
+              </div>
+            `).join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card">
+            <div class="price-row">
+              <div class="price-main">
+                <div class="sale-price"><small>₫</small>${new Intl.NumberFormat('vi-VN').format(product.price)}</div>
+                <div class="old-price">${money(product.oldPrice)}</div>
+              </div>
+              <div class="discount">${product.discount}</div>
+            </div>
+
+            <div class="product-name">${product.title}</div>
+
+            <div class="chips">
+              <div class="chip">Siêu co giãn</div>
+              <div class="chip">Ôm body</div>
+              <div class="chip">Có khóa mở</div>
+              <div class="chip">Jumpsuit liền thân</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card">
+            <div class="section-title">Điểm nổi bật</div>
+            <div class="feature-list">
+              ${product.features.map(item => `
+                <div class="feature">
+                  <div class="feature-icon">${item.icon}</div>
+                  <div>
+                    <h4>${item.title}</h4>
+                    <p>${item.text}</p>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card">
+            <div class="section-title">Chọn size</div>
+            <div class="sizes">
+              ${product.sizes.map((size, index) => `
+                <button class="size-btn ${index === currentSize ? 'active' : ''}" onclick="selectSize(${index})">
+                  ${size.label}
+                </button>
+              `).join("")}
+            </div>
+            <div class="size-note">
+              Gợi ý hiện thấy: <strong>${product.sizes[currentSize].label}</strong> — ${product.sizes[currentSize].note}
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card">
+            <div class="section-title">Mô tả nhanh</div>
+            <div class="desc">
+              ${product.description.map(text => `<p>${text}</p>`).join("")}
+            </div>
+            <div class="notice">${product.notice}</div>
+          </div>
+        </section>
+
+        <div class="sticky-bar">
+          <button class="btn btn-outline" onclick="navigator.clipboard.writeText(product.link).then(()=>alert('Đã sao chép link'))">
+            Sao chép link
+          </button>
+          <button class="btn btn-primary" onclick="openProduct()">
+            Xem sản phẩm
+          </button>
+        </div>
+      `;
     }
 
     render();
