@@ -3,7 +3,186 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cosplay Spider Suit</title>
+  <title>Cosplay Spider Suit</title>  
+</head>
+<body>
+  <div class="app" id="app"></div>
+
+  <script>
+    const product = {
+      title: "[CHE TÊN] Cosplay người nhện siêu co giãn ôm body",
+      subtitle: "Jumpsuit liền thân ôm dáng, chất vải co giãn tốt, có khóa mở tiện dụng.",
+      price: 175000,
+      oldPrice: 211750,
+      discount: "-17%",
+      link: "https://shorten.asia/FhjFhGhm",
+      brand: "SPIDER COSPLAY",
+      images: [
+            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9m48wb1f.webp",
+            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9jxl3h34.webp",
+            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9jtde0f5.webp"
+      ],
+      features: [
+        {
+          icon: "🕸️",
+          title: "Ôm body, tôn dáng",
+          text: "Phom jumpsuit liền thân cho cảm giác gọn người, nổi bật cá tính cosplay khi lên hình."
+        },
+        {
+          icon: "↔️",
+          title: "Chất vải siêu co giãn",
+          text: "Phù hợp kiểu mặc ôm sát cơ thể, dễ vận động hơn so với chất liệu bí cứng."
+        },
+        {
+          icon: "🔓",
+          title: "Thiết kế có khóa mở",
+          text: "Tối ưu trải nghiệm sử dụng, thuận tiện hơn khi mặc và tháo đồ."
+        },
+        {
+          icon: "✨",
+          title: "Phong cách nổi bật",
+          text: "Phù hợp chụp ảnh, cosplay, sự kiện, party, hóa trang hoặc nội dung sáng tạo."
+        }
+      ],
+      sizes: [
+        { label: "S", note: "40–50kg" },
+        { label: "M", note: "50–60kg" }
+      ],
+      description: [
+        "Đây là mẫu cosplay người nhện theo phong cách bodysuit ôm sát, tập trung vào cảm giác co giãn, gọn người và tạo hiệu ứng hình thể rõ ràng khi mặc.",
+        "Thiết kế jumpsuit liền thân giúp tổng thể trông đồng nhất hơn, phù hợp chụp ảnh, quay video hoặc dùng trong các dịp cần một outfit nổi bật và dễ gây chú ý.",
+        "Mẫu này cũng được mô tả có khóa mở tiện dụng, nên trải nghiệm sử dụng thực tế sẽ linh hoạt hơn so với kiểu bodysuit kín hoàn toàn."
+      ],
+      notice: "Bạn nên kiểm tra lại size, độ co giãn thực tế và ảnh thật từ shop trước khi chốt đơn. Màu sắc hiển thị có thể chênh lệch nhẹ giữa ảnh và thực tế do ánh sáng hoặc màn hình."
+    };
+
+    let currentImage = 0;
+    let currentSize = 0;
+
+    function money(value) {
+      return new Intl.NumberFormat('vi-VN').format(value) + "đ";
+    }
+
+    function openProduct() {
+      window.open(product.link, "_blank");
+    }
+
+    function changeImage(index) {
+      currentImage = index;
+      render();
+    }
+
+    function selectSize(index) {
+      currentSize = index;
+      render();
+    }
+
+    function render() {
+      const app = document.getElementById("app");
+
+      app.innerHTML = `
+        <section class="hero">
+          <div class="hero-card">
+            <div class="hero-image-wrap" onclick="openProduct()">
+              <img class="hero-image" src="${product.images[currentImage]}" alt="${product.title}">
+              <div class="overlay-top">
+                <div class="brand">${product.brand}</div>
+              </div>
+              <div class="overlay-bottom">
+                <div class="eyebrow">Bộ đồ cosplay / mobile landing</div>
+                <div class="hero-title">${product.title}</div>
+                <div class="hero-sub">${product.subtitle}</div>
+              </div>
+              <div class="counter">${currentImage + 1}/${product.images.length}</div>
+            </div>
+          </div>
+
+          <div class="thumbs">
+            ${product.images.map((img, index) => `
+              <div class="thumb ${index === currentImage ? 'active' : ''}" onclick="changeImage(${index})">
+                <img src="${img}" alt="thumb-${index + 1}">
+              </div>
+            `).join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card">
+            <div class="price-row">
+              <div class="price-main">
+                <div class="sale-price"><small>₫</small>${new Intl.NumberFormat('vi-VN').format(product.price)}</div>
+                <div class="old-price">${money(product.oldPrice)}</div>
+              </div>
+              <div class="discount">${product.discount}</div>
+            </div>
+
+            <div class="product-name">${product.title}</div>
+
+            <div class="chips">
+              <div class="chip">Siêu co giãn</div>
+              <div class="chip">Ôm body</div>
+              <div class="chip">Có khóa mở</div>
+              <div class="chip">Jumpsuit liền thân</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card">
+            <div class="section-title">Điểm nổi bật</div>
+            <div class="feature-list">
+              ${product.features.map(item => `
+                <div class="feature">
+                  <div class="feature-icon">${item.icon}</div>
+                  <div>
+                    <h4>${item.title}</h4>
+                    <p>${item.text}</p>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card">
+            <div class="section-title">Chọn size</div>
+            <div class="sizes">
+              ${product.sizes.map((size, index) => `
+                <button class="size-btn ${index === currentSize ? 'active' : ''}" onclick="selectSize(${index})">
+                  ${size.label}
+                </button>
+              `).join("")}
+            </div>
+            <div class="size-note">
+              Gợi ý hiện thấy: <strong>${product.sizes[currentSize].label}</strong> — ${product.sizes[currentSize].note}
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card">
+            <div class="section-title">Mô tả nhanh</div>
+            <div class="desc">
+              ${product.description.map(text => `<p>${text}</p>`).join("")}
+            </div>
+            <div class="notice">${product.notice}</div>
+          </div>
+        </section>
+
+        <div class="sticky-bar">
+          <button class="btn btn-outline" onclick="navigator.clipboard.writeText(product.link).then(()=>alert('Đã sao chép link'))">
+            Sao chép link
+          </button>
+          <button class="btn btn-primary" onclick="openProduct()">
+            Xem sản phẩm
+          </button>
+        </div>
+      `;
+    }
+
+    render();
+  </script>
   <style>
     * {
       box-sizing: border-box;
@@ -389,184 +568,5 @@
       box-shadow: 0 14px 30px rgba(255,59,92,0.28);
     }
   </style>
-</head>
-<body>
-  <div class="app" id="app"></div>
-
-  <script>
-    const product = {
-      title: "[CHE TÊN] Cosplay người nhện siêu co giãn ôm body",
-      subtitle: "Jumpsuit liền thân ôm dáng, chất vải co giãn tốt, có khóa mở tiện dụng.",
-      price: 175000,
-      oldPrice: 211750,
-      discount: "-17%",
-      link: "https://shorten.asia/FhjFhGhm",
-      brand: "SPIDER COSPLAY",
-      images: [
-            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9m48wb1f.webp",
-            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9jxl3h34.webp",
-            "https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mf3hhy9jtde0f5.webp"
-      ],
-      features: [
-        {
-          icon: "🕸️",
-          title: "Ôm body, tôn dáng",
-          text: "Phom jumpsuit liền thân cho cảm giác gọn người, nổi bật cá tính cosplay khi lên hình."
-        },
-        {
-          icon: "↔️",
-          title: "Chất vải siêu co giãn",
-          text: "Phù hợp kiểu mặc ôm sát cơ thể, dễ vận động hơn so với chất liệu bí cứng."
-        },
-        {
-          icon: "🔓",
-          title: "Thiết kế có khóa mở",
-          text: "Tối ưu trải nghiệm sử dụng, thuận tiện hơn khi mặc và tháo đồ."
-        },
-        {
-          icon: "✨",
-          title: "Phong cách nổi bật",
-          text: "Phù hợp chụp ảnh, cosplay, sự kiện, party, hóa trang hoặc nội dung sáng tạo."
-        }
-      ],
-      sizes: [
-        { label: "S", note: "40–50kg" },
-        { label: "M", note: "50–60kg" }
-      ],
-      description: [
-        "Đây là mẫu cosplay người nhện theo phong cách bodysuit ôm sát, tập trung vào cảm giác co giãn, gọn người và tạo hiệu ứng hình thể rõ ràng khi mặc.",
-        "Thiết kế jumpsuit liền thân giúp tổng thể trông đồng nhất hơn, phù hợp chụp ảnh, quay video hoặc dùng trong các dịp cần một outfit nổi bật và dễ gây chú ý.",
-        "Mẫu này cũng được mô tả có khóa mở tiện dụng, nên trải nghiệm sử dụng thực tế sẽ linh hoạt hơn so với kiểu bodysuit kín hoàn toàn."
-      ],
-      notice: "Bạn nên kiểm tra lại size, độ co giãn thực tế và ảnh thật từ shop trước khi chốt đơn. Màu sắc hiển thị có thể chênh lệch nhẹ giữa ảnh và thực tế do ánh sáng hoặc màn hình."
-    };
-
-    let currentImage = 0;
-    let currentSize = 0;
-
-    function money(value) {
-      return new Intl.NumberFormat('vi-VN').format(value) + "đ";
-    }
-
-    function openProduct() {
-      window.open(product.link, "_blank");
-    }
-
-    function changeImage(index) {
-      currentImage = index;
-      render();
-    }
-
-    function selectSize(index) {
-      currentSize = index;
-      render();
-    }
-
-    function render() {
-      const app = document.getElementById("app");
-
-      app.innerHTML = `
-        <section class="hero">
-          <div class="hero-card">
-            <div class="hero-image-wrap" onclick="openProduct()">
-              <img class="hero-image" src="${product.images[currentImage]}" alt="${product.title}">
-              <div class="overlay-top">
-                <div class="brand">${product.brand}</div>
-              </div>
-              <div class="overlay-bottom">
-                <div class="eyebrow">Bộ đồ cosplay / mobile landing</div>
-                <div class="hero-title">${product.title}</div>
-                <div class="hero-sub">${product.subtitle}</div>
-              </div>
-              <div class="counter">${currentImage + 1}/${product.images.length}</div>
-            </div>
-          </div>
-
-          <div class="thumbs">
-            ${product.images.map((img, index) => `
-              <div class="thumb ${index === currentImage ? 'active' : ''}" onclick="changeImage(${index})">
-                <img src="${img}" alt="thumb-${index + 1}">
-              </div>
-            `).join("")}
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="card">
-            <div class="price-row">
-              <div class="price-main">
-                <div class="sale-price"><small>₫</small>${new Intl.NumberFormat('vi-VN').format(product.price)}</div>
-                <div class="old-price">${money(product.oldPrice)}</div>
-              </div>
-              <div class="discount">${product.discount}</div>
-            </div>
-
-            <div class="product-name">${product.title}</div>
-
-            <div class="chips">
-              <div class="chip">Siêu co giãn</div>
-              <div class="chip">Ôm body</div>
-              <div class="chip">Có khóa mở</div>
-              <div class="chip">Jumpsuit liền thân</div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="card">
-            <div class="section-title">Điểm nổi bật</div>
-            <div class="feature-list">
-              ${product.features.map(item => `
-                <div class="feature">
-                  <div class="feature-icon">${item.icon}</div>
-                  <div>
-                    <h4>${item.title}</h4>
-                    <p>${item.text}</p>
-                  </div>
-                </div>
-              `).join("")}
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="card">
-            <div class="section-title">Chọn size</div>
-            <div class="sizes">
-              ${product.sizes.map((size, index) => `
-                <button class="size-btn ${index === currentSize ? 'active' : ''}" onclick="selectSize(${index})">
-                  ${size.label}
-                </button>
-              `).join("")}
-            </div>
-            <div class="size-note">
-              Gợi ý hiện thấy: <strong>${product.sizes[currentSize].label}</strong> — ${product.sizes[currentSize].note}
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="card">
-            <div class="section-title">Mô tả nhanh</div>
-            <div class="desc">
-              ${product.description.map(text => `<p>${text}</p>`).join("")}
-            </div>
-            <div class="notice">${product.notice}</div>
-          </div>
-        </section>
-
-        <div class="sticky-bar">
-          <button class="btn btn-outline" onclick="navigator.clipboard.writeText(product.link).then(()=>alert('Đã sao chép link'))">
-            Sao chép link
-          </button>
-          <button class="btn btn-primary" onclick="openProduct()">
-            Xem sản phẩm
-          </button>
-        </div>
-      `;
-    }
-
-    render();
-  </script>
 </body>
 </html>
